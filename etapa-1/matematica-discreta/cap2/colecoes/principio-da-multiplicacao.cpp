@@ -1,45 +1,48 @@
 #include <iostream>
-#include <cmath>
 #include <vector>
+#include <cmath>
 
 using namespace std;
 
-void print(vector<int> v) {
+void print(vector<int> v)
+{
     cout << "(";
     for (int i = 0; i < v.size()-1;i++) {
-        cout << v[i]  << ","; 
+        cout << v[i] << ", ";
     }
-    cout << v[v.size()-1] << ")" << endl;
-}
+    cout << v[v.size()-1]<< ")" << endl;
+} 
 
-void makeCombination(vector<int> &v, int pos, int n, int m) {
-    if (m == pos) {
-        print(v); 
-        return;
+
+void combinations(vector<int> &v, int pos, int n, int m)
+{
+    if (pos == m) 
+    {
+        print(v);
+        return;    
     }
-    for (int i = 1; i<=n;i++) {
+
+    for (int i  = 0; i < n; i++) 
+    {
         v[pos] = i;
-        makeCombination(v, pos+1, n, m);
-    }          
+        combinations(v, pos+1, n, m);
+    }
+
 }
 
-void combinations(int n, int m) {
-    vector<int> v(m);
-    makeCombination(v,0, n, m);
-}   
 
-
-int main() {
-    int m;
+int main()
+{
+    int n, m;
+    cout << "Digite o tamanho do espaco amostral: ";
+    cin >> n;
     cout << "Digite o tamanho da lista: ";
     cin >> m;
-    int n;
-    cout << "Digite quantos items tem o espaco amostral:";
-    cin >> n;
+
+    cout << "As quantidade de combinacoes eh: " << pow(n, m) << endl;
+
+    cout << "As combinacoes sao: " << endl; 
     
-    cout << "Numero de combinacoes: " << pow(n,m) << endl;     
-    
-    cout << "Aqui estao as combinacoes: " << endl;
-   
-    combinations(n, m);
-} 
+    vector<int> v(m);
+    combinations(v, 0, n, m);
+}
